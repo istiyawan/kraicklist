@@ -6,22 +6,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KraickList - Find Your Needs Here</title>
+<style>
+ul{
+    list-style-type:none;
+}
+#wrapper{
+    width:1200px;
+}
+#filter{
+    float:left;
+    width:200px;
+}
+#content{
+    float:left;
+    width:700px;
+}
+</style>
 </head>
 
 <body>
     <div>
+        <h1>KraickList</h1>
         <form id="form" autocomplete="off">
             <input type="text" id="query" name="query">
-            <button type="submit">Search</button>
+            <button type="submit">Search Pencarian</button>
         </form>
     </div>
+    <div id ="">
+        <ul id="match_item">
+        </ul>
+    </div>
     <div>
-        <ul id="resultList"></ul>
+        <div id="filter">
+            Tags
+            <ul id="filterList"></ul>
+        </div>
+        <div id="content">
+            <ul id="resultList"></ul>
+        </div>
     </div>
     <script>
+        var searchByTags2 = function(ev){
+            event.preventDefault();
+            const tags = this.getAttribute("value");
+                const response = fetch(`/category?cat=${tags}`).then((response) => {
+                    response.json().then((results) => {
+                        if (!results) {
+                            alert(`No result for ${tags}`);
+                            return
+                        }
+                        Controller.updateListByContent(results);
+                    });
+                });
+        }
+
         const Controller = {
             search: (ev) => {
-                ev.preventDefault();
+                ev.preventDefault(); 
                 const data = Object.fromEntries(new FormData(form));
                 const response = fetch(`/search?q=${data.query}`).then((response) => {
                     response.json().then((results) => {
@@ -30,31 +71,175 @@
                             return
                         }
                         Controller.updateList(results);
+                        Controller.updateFilter(results);
+                        Controller.searchItemList(results=[]);
+
                     });
                 });
             },
-
+            
             updateList: (results) => {
+                // console.log(results);
                 const rows = [];
                 for (let result of results) {
+                    var footerTags = result.tags;
                     rows.push(
                         `
                             <li>
-                                <div>
-                                    <p>${result.title}</p>
-                                    <p>${result.content}</p>
+                                <div style='border:1px solid black;padding:10px;font-family:tahoma;'>
+                                    <p>Title :${result.title}</p>
+                                    <p>Detail :${result.content}</p>
+                                    <img src="${result.thumb_url}">
                                 </div>
                             </li>
                         `
                     );
                 }
+                rows.push(`<li> <div style='border:1px solid black;padding:10px;font-family:tahoma;'> <p>Tags:${footerTags}</p> </div> `)
                 resultList.innerHTML = rows.join(" ");
             },
+
+            updateListByContent:(results) => {
+                const rows = [];
+                console.log(results);
+                for (let result of results) {
+                    var footerTags = result.tags
+                    rows.push(
+                        `
+                            <li>
+                                <div style='border:1px solid black;padding:10px;font-family:tahoma;'>
+                                    <p>Title${result.title}</p>
+                                    <p>Detail${result.content}</p>
+                                    <img src="${result.thumb_url}">
+                                </div>
+                            </li>
+                        `
+                    );
+                }
+                rows.push(`<li> <div style='border:1px solid black;padding:10px;font-family:tahoma;'> <p>Tags:${footerTags}</p> </div> `)
+                resultList.innerHTML = rows.join(" ");
+            },
+
+            updateFilter_:(results) => {
+
+                const arrayCategory=[];
+                for(category of results){
+                    arrayCategory.push(category.tags)
+                }
+
+                let categoryArray= Array.prototype.concat.apply([],arrayCategory)
+                singleTags= Array.from(new Set(categoryArray));
+                singleTagsLength = singleTags.length;
+                var ctags2 = document.getElementsByClassName("ctags2");
+
+                for(tags of singleTags){
+                    var line = document.createElement("li");
+                    line.innerHTML =` <a class="ctags2" href='#' value="${tags}">${tags}</a>`;
+                    filterList.appendChild(line);
+
+                }
+                for(var i=0 ; i < singleTagsLength; i ++){
+                    ctags2[i].addEventListener("click", searchByTags2,false);
+                }
+            },
+
+            updateFilter:(results) => {
+                const rows = [];
+                const itemFilter = [];
+                for(let filter of results){
+                    itemFilter.push(filter.tags);
+                }
+
+                let filterItem = Array.prototype.concat.apply([],itemFilter)
+                singleFilter= Array.from(new Set(filterItem));
+                singleFilterLength= singleFilter.length;
+                var ctags = document.getElementsByClassName("ctags");
+
+                for(filter of singleFilter){
+                        rows.push(
+                            `
+                            <li>
+                                <a class ="ctags" href='#' value='${filter}'>${filter}</a>
+                            </li>
+                            `
+                        );
+                }
+
+                filterList.innerHTML=rows.join(" ");
+
+                for(var i=0 ; i < singleFilterLength; i ++){
+                    ctags[i].addEventListener("click", searchByTags2,false);
+                }
+
+            },
+
+            searchItemList:(results)=>{
+                const rows = [];
+                const searchItem = [];
+                const matchItem = document.getElementById('match_item');
+                var ctags = document.getElementsByClassName("ctags");
+                for(let item of results){
+                    // searchItem.push(item.title);
+                        rows.push(
+                            `
+                            <li>
+                                <a class ="ctags" href='#' value='${item.title}'>${item.title}</a>
+                            </li>
+                            `
+                        );
+                }
+
+                matchItem.innerHTML = rows.join('');
+                for(var i = 0 ; i < results.length; i ++){
+                    ctags[i].addEventListener("click",selectSearchItem,false);
+                    // let valueList= getAttribute("value");
+                    // ctags[i].addEventListener("click",()=>{
+                    //     // const tags = this.getAttribute("value");
+                    //     query.value = valueList ;
+                    // },false);
+                }
+
+            }
         };
 
         const form = document.getElementById("form");
         form.addEventListener("submit", Controller.search);
+
+        var searchItem = function(ev){
+            const searchItem = Object.fromEntries(new FormData(form));
+            if(searchItem.query.length===0){
+                results = [];
+                Controller.searchItemList(results);
+            }else{
+                const response = fetch(`/searchItem?search=${searchItem.query}`).
+                    then((response) => { 
+                        response.json().then((results) => {
+                        if (!results) {
+                            // alert(`No result for ${searchItem.query}`);
+                            results = [];
+                            Controller.searchItemList(results);
+                        }else{
+                            Controller.searchItemList(results);
+                        }
+                    });
+
+                });
+            }
+        }
+
+        var selectSearchItem = function(){
+            const tags = this.getAttribute("value");
+            query.value = tags
+            results=[];
+            Controller.searchItemList(results);
+        }
+
+        const search = document.getElementById('form'); 
+        const matchItem = document.getElementById('match_item');
+
+        // .addEventListener('input', ()=>searchItem(search.value));
+        search.addEventListener('input', searchItem);
+
     </script>
 </body>
-
 </html>

@@ -23,6 +23,8 @@ func main() {
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/", fs)
 	http.HandleFunc("/search", handleSearch(searcher))
+	http.HandleFunc("/category", handleSearchByTags(searcher))
+	http.HandleFunc("/searchItem", handleSearchItem(searcher))
 	// define port, we need to set it as env for Heroku deployment
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -63,6 +65,60 @@ func handleSearch(s *Searcher) http.HandlerFunc {
 	)
 }
 
+func handleSearchByTags(s *Searcher) http.HandlerFunc {
+	return http.HandlerFunc(
+		func(w http.ResponseWriter, r *http.Request) {
+			cat := r.URL.Query().Get("cat")
+			if len(cat) == 0 {
+				w.WriteHeader(http.StatusBadRequest)
+				w.Write([]byte("missing search query in query params"))
+				return
+			}
+			// search relevant records
+			records, err := s.SearchByCat(cat)
+			if err != nil {
+				w.WriteHeader(http.StatusInternalServerError)
+				w.Write([]byte(err.Error()))
+				return
+			}
+			// output success response
+			buf := new(bytes.Buffer)
+			encoder := json.NewEncoder(buf)
+			encoder.Encode(records)
+			w.Header().Set("Content-Type", "application/json")
+			w.Write(buf.Bytes())
+
+		},
+	)
+}
+
+func handleSearchItem(s *Searcher) http.HandlerFunc {
+	return http.HandlerFunc(
+		func(w http.ResponseWriter, r *http.Request) {
+			search := r.URL.Query().Get("search")
+			if len(search) == 0 {
+				w.WriteHeader(http.StatusBadRequest)
+				w.Write([]byte("missing search query in query params"))
+				return
+			}
+			// search relevant records
+			records, err := s.SearchItem(search)
+			if err != nil {
+				w.WriteHeader(http.StatusInternalServerError)
+				w.Write([]byte(err.Error()))
+				return
+			}
+			// output success response
+			buf := new(bytes.Buffer)
+			encoder := json.NewEncoder(buf)
+			encoder.Encode(records)
+			w.Header().Set("Content-Type", "application/json")
+			w.Write(buf.Bytes())
+
+		},
+	)
+}
+
 type Searcher struct {
 	records []Record
 }
@@ -99,6 +155,28 @@ func (s *Searcher) Search(query string) ([]Record, error) {
 	var result []Record
 	for _, record := range s.records {
 		if strings.Contains(record.Title, query) || strings.Contains(record.Content, query) {
+			result = append(result, record)
+		}
+	}
+	return result, nil
+}
+
+func (s *Searcher) SearchByCat(cat string) ([]Record, error) {
+	var result []Record
+	for _, record := range s.records {
+		for _, tags := range record.Tags {
+			if strings.Contains(tags, cat) {
+				result = append(result, record)
+			}
+		}
+	}
+	return result, nil
+}
+
+func (s *Searcher) SearchItem(query string) ([]Record, error) {
+	var result []Record
+	for _, record := range s.records {
+		if strings.HasPrefix(record.Title, query) {
 			result = append(result, record)
 		}
 	}
