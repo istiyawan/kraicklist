@@ -5,8 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>KraickList - Find Your Needs Here</title>
 <style>
+p{
+    font-size:12px;
+
+}
 ul{
     list-style-type:none;
 }
@@ -19,35 +28,227 @@ ul{
 }
 #content{
     float:left;
-    width:700px;
+    /* width:700px; */
+}
+
+.section-search input{
+    /* padding:5px !important; */
+}
+
+.card{
+    height:400px;
+}
+
+.card .card-image img{
+    display:block; 
+    width:70%;
+    height:70%;
+    margin-left:auto;
+    margin-right:auto;
+    padding-top:20px;
+    /* height:300px; */
+}
+.body-content{
+    padding:0 60px;
+    margin:30px 0;
+}
+.card .product-card p{
+    font-size:2px;
+}
+
+input.search-field {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.54);
+  border-radius: 2px;
+  border: 0;
+  border-radius: 5px;
+  height: 36px;
+  padding: 8px 8px 8px 10px;
+  width: 100%;
+  background: #f7f7f7;
+  transition: background 0.2s, width .2s;
+}
+input.search-field:hover {
+  background: #ebebeb;
+}
+.searchContent{
+  z-index:1;
+  color: black;
+  /* width: 90%; */
+  margin: 35px 0 0 27px;
+  /* height: auto; */
+  padding: 8px 10px;
+  /* border:1px solid red; */
+  position:absolute;
+  text-align:left;
+  width:69%;
+}
+
+.searchContent .card{
+    margin:10px;
+    height:100%;
+}
+
+.searchContent ul li{
+    padding:5px 10px;
+}
+
+.footer{
+    background-color:#2196F3;
+    position:fixed;
+    color:black;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:50px;
+    text-align:center;
+    margin-top:20px
+}
+
+.searchButton {
+    text-align: left;
+}
+
+.section {
+    padding-bottom: 0.001rem;
 }
 </style>
 </head>
 
 <body>
-    <div>
-        <h1>KraickList</h1>
-        <form id="form" autocomplete="off">
-            <input type="text" id="query" name="query">
-            <button type="submit">Search Pencarian</button>
-        </form>
-    </div>
-    <div id ="">
-        <ul id="match_item">
-        </ul>
-    </div>
-    <div>
-        <div id="filter">
-            Tags
-            <ul id="filterList"></ul>
+    <div class="navbar-fixed">
+    <nav class="blue darken-1">
+        <div class="nav-wrapper">
+            <div class="row">
+                <div class="col m2">
+                    <a href="#!" class="brand-logo"><i class="material-icons"></i>KraickList</a>
+                </div>
+                <div class="col m10">
+                 <div class="input-field">
+                     <form id = "form" >
+                         <div class="col s10"><input id="query" placeholder="Search" type="text" class="browser-default search-field" name="query" value="" autocomplete="off" aria-label="Search box"></div>
+                         <div class="col s2 searchButton"><input class="btn btn-primary" type="submit" value="search"></div>
+                     </form>
+                 </div>
+                </div>
+            </div>
         </div>
-        <div id="content">
-            <ul id="resultList"></ul>
-        </div>
+      </nav>
+      <div class="container">
+         <div class="searchContent ">
+            <ul id="match_item" class="card"></ul>
+         </div>
+      </div>
     </div>
+    <!-- <div class="navbar&#45;fixed"> -->
+    <!--     <!&#45;&#45; <nav class="blue darken&#38;#45;1"> &#45;&#45;> -->
+    <!--       <div class="container"> -->
+    <!--         <div class="nav&#45;wrapper"> -->
+    <!--             <a href="#!" class="brand&#45;logo">KraickList &#45; Find Your Need Here</a>        -->
+    <!--         </div> -->
+    <!--       </div> -->
+    <!--     <!&#45;&#45; </nav> &#45;&#45;> -->
+    <!-- </div> -->
+ 
+    <!-- <section id="search" class="section section&#45;search blue white&#45;text center scrollspy"> -->
+    <!-- <div class="containers"> -->
+    <!--   <div class="row headerGroup"> -->
+    <!--     <div class="col s12 m3 l2"> -->
+    <!--         <strong><p style="font&#45;size:23px;margin&#45;bottom:10px;text&#45;align:left;">KRAICKLIST</p></strong> -->
+    <!--     </div> -->
+    <!--     <div class="col s12 m3 l10"> -->
+    <!--          <div class="input&#45;field"> -->
+    <!--              <form id = "form" > -->
+    <!--                  <div class="col s10"><input id="query" placeholder="Search" type="text" class="browser&#45;default search&#45;field" name="query" value="" autocomplete="off" aria&#45;label="Search box"></div> -->
+    <!--                  <div class="col s2 searchButton"><input class="btn btn&#45;primary" type="submit" value="search"></div> -->
+    <!--              </form> -->
+    <!--          </div> -->
+    <!--          <div class="searchContent "> -->
+    <!--             <ul id="match_item" class="card"></ul> -->
+    <!--          </div> -->
+    <!--       </div> -->
+    <!--     </div> -->
+    <!--   </div> -->
+    <!-- </div> -->
+    <!-- </section> -->
+    <!-- <section class="section" style="position:absolute;"> -->
+    <!--     <div class="container"> -->
+    <!--       <div class="row"> -->
+    <!--           <div class="col s10"> -->
+    <!--              <div class="searchContent"> -->
+    <!--                 <ul id="match_item" class=""></ul> -->
+    <!--              </div> -->
+    <!--          </div> -->
+    <!--       </div> -->
+    <!--       </div> -->
+    <!-- </section> -->
+    <section class="section body-content">
+        <div class="containers">
+            <div class="row">
+                <div id="filter" class="col s4 card-panel">
+                    <ul id="filterList">Filter</ul>
+                </div>
+                <div id="content" class="col s8">
+                    <div id="resultList"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer section darken-2 white-text center">
+        <p>KraickList&copy; 2021</p>
+    </footer>
+
+
+    <!-- <div class="container"> -->
+    <!--     <div class="row"> -->
+    <!--         <form id="form" autocomplete="off"> -->
+    <!--             <div class="row"> -->
+    <!--                 <div class="input&#45;field col s12 m8 l8"><input type="text" id="query" name="query"></div> -->
+    <!--                 <div class="input&#45;field col s12 m4 l4"><button class="btn&#45;small" type="submit">Search Pencarian</button></div> -->
+    <!--             </div> -->
+    <!--     <div> -->
+    <!--         <ul style="margin&#45;top:10px;" id="match_item" class="card"> -->
+    <!--         </ul> -->
+    <!--     </div> -->
+    <!--         </form> -->
+    <!--     </div> -->
+        <!-- <div> -->
+        <!--     <ul style="margin&#45;top:10px;" id="match_item" class="card"> -->
+        <!--     </ul> -->
+        <!-- </div> -->
+    <!--     <div class="row"> -->
+    <!--         <div id="filter" class="s12 m4 l2"> -->
+    <!--             Tags -->
+    <!--             <ul id="filterList"></ul> -->
+    <!--         </div> -->
+    <!--         <div id="content" class="s12 m4 l2"> -->
+    <!--             <ul id="resultList"></ul> -->
+    <!--         </div> -->
+    <!--     </div> -->
+    <!-- </div> -->
     <script>
+        function timeConverter(t) {     
+            var a = new Date(t * 1000);
+            var today = new Date();
+            var yesterday = new Date(Date.now() - 86400000);
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            var year = a.getFullYear();
+            var month = months[a.getMonth()];
+            var date = a.getDate();
+            var hour = a.getHours();
+            var min = a.getMinutes();
+            // if (a.setHours(0,0,0,0) == today.setHours(0,0,0,0))
+            //     return 'today, ' + hour + ':' + min;
+            // else if (a.setHours(0,0,0,0) == yesterday.setHours(0,0,0,0))
+            //     return 'yesterday, ' + hour + ':' + min;
+            // else if (year == today.getFullYear())
+            //     return date + ' ' + month + ', ' + hour + ':' + min;
+            // else
+                return date + ' ' + month + ' ' + year + ', ' + hour + ':' + min;
+        }
+
         var searchByTags2 = function(ev){
-            event.preventDefault();
+            ev.preventDefault();
             const tags = this.getAttribute("value");
                 const response = fetch(`/category?cat=${tags}`).then((response) => {
                     response.json().then((results) => {
@@ -64,59 +265,132 @@ ul{
             search: (ev) => {
                 ev.preventDefault(); 
                 const data = Object.fromEntries(new FormData(form));
+
+                // const searchHistory=[];
+                // searchHistory.push(data.query);
+                // console.log("history pencarian :"+searchHistory);
+                // searchHistory.append(data.query);
+            
                 const response = fetch(`/search?q=${data.query}`).then((response) => {
                     response.json().then((results) => {
                         if (!results) {
                             alert(`No result for ${data.query}`);
                             return
                         }
+                        // console.log(results);
                         Controller.updateList(results);
                         Controller.updateFilter(results);
                         Controller.searchItemList(results=[]);
-
                     });
                 });
             },
+            
+            // searchByTags2_: (ev)=>{
+            // ev.preventDefault();
+            // const tags = Object.getAttribute("value");
+            //     const response = fetch(`/category?cat=${tags}`).then((response) => {
+            //         response.json().then((results) => {
+            //             if (!results) {
+            //                 alert(`No result for ${tags}`);
+            //                 return
+            //             }
+            //             Controller.updateListByContent(results);
+            //         });
+            //     });
+            // },
             
             updateList: (results) => {
                 // console.log(results);
                 const rows = [];
                 for (let result of results) {
+                    
+                    var imgList=[];
+                    var imgDetail = result.image_urls;
+                    var productUpdated =timeConverter(result.updated_at);
+
+                    // for(let img of imgDetail)
+                    // {
+                    //     rows.push(
+                    //         `
+                    //         <div class="col s4 card" ><img src="${img}" size="100" width="100" height="100"></div>
+                    //
+                    //         `
+                    //     );
+                    // }
                     var footerTags = result.tags;
                     rows.push(
-                        `
-                            <li>
-                                <div style='border:1px solid black;padding:10px;font-family:tahoma;'>
-                                    <p>Title :${result.title}</p>
-                                    <p>Detail :${result.content}</p>
-                                    <img src="${result.thumb_url}">
+                        `  
+                        <div class="col m4">
+                            <div class="card product-card">
+                                <div class="card-image">
+                                    <img src="${result.thumb_url}" width="50" height="50"/></p>
                                 </div>
-                            </li>
+                                <div class="card-stacked">
+                                <div class="card-content">
+                                    <strong><p>${result.title}</p></strong>
+                                    <p>${productUpdated}</p>
+                                </div>
+                                <div class="card-action"> 
+                                    <button class="btn">View</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                         `
                     );
+
+                        
                 }
-                rows.push(`<li> <div style='border:1px solid black;padding:10px;font-family:tahoma;'> <p>Tags:${footerTags}</p> </div> `)
+                // rows.push(`<div="card"> <div class="card-content">Tags:${footerTags}</p> </div></div> `)
+                // rows.push(`<li> <div style='border:1px solid black;padding:10px;font-family:tahoma;'> <p>Tags:${imgDetail}</p> </div> `)
                 resultList.innerHTML = rows.join(" ");
             },
 
             updateListByContent:(results) => {
                 const rows = [];
-                console.log(results);
                 for (let result of results) {
+                    
+                    var productUpdated =timeConverter(result.updated_at);
+                    var imgList=[];
+                    var imgDetail = result.image_urls;
+
+                    // for(let img of imgDetail)
+                    // {
+                    //     rows.push(
+                    //         `
+                    //         <li><div class="card"><img src="${img}" size="100" width="100" height="100"></div>
+                    //         `
+                    //     );
+                    // }
                     var footerTags = result.tags
+                    // rows.push(
+                    //     `
+                    //             <div class="card">
+                    //                 <p>Title${result.title}</p>
+                    //                 <p>Detail${result.content}</p>
+                    //                 <img src="${result.thumb_url}">
+                    //             </div>
+                    //         </li>
+                    //     `
+                    // );
                     rows.push(
-                        `
-                            <li>
-                                <div style='border:1px solid black;padding:10px;font-family:tahoma;'>
-                                    <p>Title${result.title}</p>
-                                    <p>Detail${result.content}</p>
-                                    <img src="${result.thumb_url}">
+                        `  
+                        <div class="col m4">
+                            <div class="card product-card">
+                                <div class="card-image">
+                                    <img src="${result.thumb_url}" width="50" height="50"/></p>
                                 </div>
-                            </li>
+                                <div class="card-content">
+                                    <p>${result.title}</p>
+                                    <p>${productUpdated}</p>
+                                </div>
+                            </div>
+                        </div>
                         `
                     );
+                    
                 }
-                rows.push(`<li> <div style='border:1px solid black;padding:10px;font-family:tahoma;'> <p>Tags:${footerTags}</p> </div> `)
+                <!-- rows.push(`<div="card"> <div class="card&#45;content">Tags:${footerTags}</p> </div></div> `) -->
                 resultList.innerHTML = rows.join(" ");
             },
 
@@ -155,6 +429,10 @@ ul{
                 singleFilterLength= singleFilter.length;
                 var ctags = document.getElementsByClassName("ctags");
 
+                rows.push(
+                    `<li>Filter<li>`
+                );
+
                 for(filter of singleFilter){
                         rows.push(
                             `
@@ -192,13 +470,7 @@ ul{
                 matchItem.innerHTML = rows.join('');
                 for(var i = 0 ; i < results.length; i ++){
                     ctags[i].addEventListener("click",selectSearchItem,false);
-                    // let valueList= getAttribute("value");
-                    // ctags[i].addEventListener("click",()=>{
-                    //     // const tags = this.getAttribute("value");
-                    //     query.value = valueList ;
-                    // },false);
                 }
-
             }
         };
 
@@ -207,6 +479,8 @@ ul{
 
         var searchItem = function(ev){
             const searchItem = Object.fromEntries(new FormData(form));
+           
+            
             if(searchItem.query.length===0){
                 results = [];
                 Controller.searchItemList(results);
@@ -215,7 +489,6 @@ ul{
                     then((response) => { 
                         response.json().then((results) => {
                         if (!results) {
-                            // alert(`No result for ${searchItem.query}`);
                             results = [];
                             Controller.searchItemList(results);
                         }else{
@@ -224,22 +497,30 @@ ul{
                     });
 
                 });
+
+                localStorage.setItem("searchHistory",searchItem.query);
+
             }
         }
 
         var selectSearchItem = function(){
             const tags = this.getAttribute("value");
+            // const searchHistory=[];
+            // searchHistory.push(tags);
             query.value = tags
             results=[];
             Controller.searchItemList(results);
+
         }
 
         const search = document.getElementById('form'); 
         const matchItem = document.getElementById('match_item');
 
-        // .addEventListener('input', ()=>searchItem(search.value));
         search.addEventListener('input', searchItem);
 
+        console.log(localStorage.getItem("searchHistory"));
+
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
