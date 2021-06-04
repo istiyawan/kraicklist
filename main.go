@@ -32,7 +32,7 @@ func main() {
 	}
 	// start server
 	fmt.Printf("Server is listening on %s...", port)
-	err = http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
+	err = http.ListenAndServe(fmt.Sprintf(":%s", "8080"), nil)
 	if err != nil {
 		log.Fatalf("unable to start server due: %v", err)
 	}
