@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>KraickList - Find Your Needs Here</title>
 <style>
 p{
@@ -28,17 +28,10 @@ ul{
 }
 #content{
     float:left;
-    /* width:700px; */
 }
-
-.section-search input{
-    /* padding:5px !important; */
-}
-
 .card{
     height:400px;
 }
-
 .card .card-image img{
     display:block; 
     width:70%;
@@ -46,16 +39,19 @@ ul{
     margin-left:auto;
     margin-right:auto;
     padding-top:20px;
-    /* height:300px; */
+}
+.card .card-content p{
+    font-size:15px;
 }
 .body-content{
     padding:0 60px;
     margin:30px 0;
+    text-align:center;
+    font-size:15px;
 }
 .card .product-card p{
     font-size:2px;
 }
-
 input.search-field {
   font-weight: 500;
   color: rgba(0, 0, 0, 0.54);
@@ -74,11 +70,8 @@ input.search-field:hover {
 .searchContent{
   z-index:1;
   color: black;
-  /* width: 90%; */
   margin: 35px 0 0 27px;
-  /* height: auto; */
   padding: 8px 10px;
-  /* border:1px solid red; */
   position:absolute;
   text-align:left;
   width:69%;
@@ -140,48 +133,6 @@ input.search-field:hover {
          </div>
       </div>
     </div>
-    <!-- <div class="navbar&#45;fixed"> -->
-    <!--     <!&#45;&#45; <nav class="blue darken&#38;#45;1"> &#45;&#45;> -->
-    <!--       <div class="container"> -->
-    <!--         <div class="nav&#45;wrapper"> -->
-    <!--             <a href="#!" class="brand&#45;logo">KraickList &#45; Find Your Need Here</a>        -->
-    <!--         </div> -->
-    <!--       </div> -->
-    <!--     <!&#45;&#45; </nav> &#45;&#45;> -->
-    <!-- </div> -->
- 
-    <!-- <section id="search" class="section section&#45;search blue white&#45;text center scrollspy"> -->
-    <!-- <div class="containers"> -->
-    <!--   <div class="row headerGroup"> -->
-    <!--     <div class="col s12 m3 l2"> -->
-    <!--         <strong><p style="font&#45;size:23px;margin&#45;bottom:10px;text&#45;align:left;">KRAICKLIST</p></strong> -->
-    <!--     </div> -->
-    <!--     <div class="col s12 m3 l10"> -->
-    <!--          <div class="input&#45;field"> -->
-    <!--              <form id = "form" > -->
-    <!--                  <div class="col s10"><input id="query" placeholder="Search" type="text" class="browser&#45;default search&#45;field" name="query" value="" autocomplete="off" aria&#45;label="Search box"></div> -->
-    <!--                  <div class="col s2 searchButton"><input class="btn btn&#45;primary" type="submit" value="search"></div> -->
-    <!--              </form> -->
-    <!--          </div> -->
-    <!--          <div class="searchContent "> -->
-    <!--             <ul id="match_item" class="card"></ul> -->
-    <!--          </div> -->
-    <!--       </div> -->
-    <!--     </div> -->
-    <!--   </div> -->
-    <!-- </div> -->
-    <!-- </section> -->
-    <!-- <section class="section" style="position:absolute;"> -->
-    <!--     <div class="container"> -->
-    <!--       <div class="row"> -->
-    <!--           <div class="col s10"> -->
-    <!--              <div class="searchContent"> -->
-    <!--                 <ul id="match_item" class=""></ul> -->
-    <!--              </div> -->
-    <!--          </div> -->
-    <!--       </div> -->
-    <!--       </div> -->
-    <!-- </section> -->
     <section class="section body-content">
         <div class="containers">
             <div class="row">
@@ -197,35 +148,6 @@ input.search-field:hover {
     <footer class="footer section darken-2 white-text center">
         <p>KraickList&copy; 2021</p>
     </footer>
-
-
-    <!-- <div class="container"> -->
-    <!--     <div class="row"> -->
-    <!--         <form id="form" autocomplete="off"> -->
-    <!--             <div class="row"> -->
-    <!--                 <div class="input&#45;field col s12 m8 l8"><input type="text" id="query" name="query"></div> -->
-    <!--                 <div class="input&#45;field col s12 m4 l4"><button class="btn&#45;small" type="submit">Search Pencarian</button></div> -->
-    <!--             </div> -->
-    <!--     <div> -->
-    <!--         <ul style="margin&#45;top:10px;" id="match_item" class="card"> -->
-    <!--         </ul> -->
-    <!--     </div> -->
-    <!--         </form> -->
-    <!--     </div> -->
-        <!-- <div> -->
-        <!--     <ul style="margin&#45;top:10px;" id="match_item" class="card"> -->
-        <!--     </ul> -->
-        <!-- </div> -->
-    <!--     <div class="row"> -->
-    <!--         <div id="filter" class="s12 m4 l2"> -->
-    <!--             Tags -->
-    <!--             <ul id="filterList"></ul> -->
-    <!--         </div> -->
-    <!--         <div id="content" class="s12 m4 l2"> -->
-    <!--             <ul id="resultList"></ul> -->
-    <!--         </div> -->
-    <!--     </div> -->
-    <!-- </div> -->
     <script>
         function timeConverter(t) {     
             var a = new Date(t * 1000);
@@ -237,13 +159,6 @@ input.search-field:hover {
             var date = a.getDate();
             var hour = a.getHours();
             var min = a.getMinutes();
-            // if (a.setHours(0,0,0,0) == today.setHours(0,0,0,0))
-            //     return 'today, ' + hour + ':' + min;
-            // else if (a.setHours(0,0,0,0) == yesterday.setHours(0,0,0,0))
-            //     return 'yesterday, ' + hour + ':' + min;
-            // else if (year == today.getFullYear())
-            //     return date + ' ' + month + ', ' + hour + ':' + min;
-            // else
                 return date + ' ' + month + ' ' + year + ', ' + hour + ':' + min;
         }
 
@@ -261,28 +176,34 @@ input.search-field:hover {
                 });
         }
 
+        const itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];//history search
+
         const Controller = {
             search: (ev) => {
                 ev.preventDefault(); 
                 const data = Object.fromEntries(new FormData(form));
 
-                // const searchHistory=[];
-                // searchHistory.push(data.query);
-                // console.log("history pencarian :"+searchHistory);
-                // searchHistory.append(data.query);
-            
+                // const itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];//history search
+                localStorage.setItem('items', JSON.stringify(itemsArray));
+                itemsArray.push(data.query)
+                localStorage.setItem('items',JSON.stringify(itemsArray));
+                console.log(localStorage.getItem('items'));
+                console.log(itemsArray);
+
                 const response = fetch(`/search?q=${data.query}`).then((response) => {
                     response.json().then((results) => {
                         if (!results) {
                             alert(`No result for ${data.query}`);
                             return
                         }
-                        // console.log(results);
+
                         Controller.updateList(results);
                         Controller.updateFilter(results);
                         Controller.searchItemList(results=[]);
                     });
                 });
+
+
             },
             
             // searchByTags2_: (ev)=>{
@@ -300,13 +221,19 @@ input.search-field:hover {
             // },
             
             updateList: (results) => {
-                // console.log(results);
                 const rows = [];
                 for (let result of results) {
                     
                     var imgList=[];
                     var imgDetail = result.image_urls;
                     var productUpdated =timeConverter(result.updated_at);
+                    var resultTitle = result.title.substring(0,24)+"..." 
+
+                    //get image size
+                    var img =  imgDetail;
+                    //or however you get a handle to the IMG
+                    var width = img.width;
+                    var height = img.height;
 
                     // for(let img of imgDetail)
                     // {
@@ -327,12 +254,14 @@ input.search-field:hover {
                                 </div>
                                 <div class="card-stacked">
                                 <div class="card-content">
-                                    <strong><p>${result.title}</p></strong>
+                                    <p>${resultTitle}</p>
                                     <p>${productUpdated}</p>
                                 </div>
                                 <div class="card-action"> 
                                     <button class="btn">View</button>
                                 </div>
+                                width: ${width}
+                                height:${height}
                                 </div>
                             </div>
                         </div>
@@ -354,6 +283,8 @@ input.search-field:hover {
                     var imgList=[];
                     var imgDetail = result.image_urls;
 
+                    var resultTitle = result.title.substring(0,24)+"..." 
+
                     // for(let img of imgDetail)
                     // {
                     //     rows.push(
@@ -366,7 +297,7 @@ input.search-field:hover {
                     // rows.push(
                     //     `
                     //             <div class="card">
-                    //                 <p>Title${result.title}</p>
+                    //                 <p>Title${resultIitle}</p>
                     //                 <p>Detail${result.content}</p>
                     //                 <img src="${result.thumb_url}">
                     //             </div>
@@ -380,9 +311,14 @@ input.search-field:hover {
                                 <div class="card-image">
                                     <img src="${result.thumb_url}" width="50" height="50"/></p>
                                 </div>
+                                <div class="card-stacked">
                                 <div class="card-content">
-                                    <p>${result.title}</p>
+                                    <p>${resultTitle}</p>
                                     <p>${productUpdated}</p>
+                                </div>
+                                <div class="card-action"> 
+                                    <button class="btn">View</button>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -457,7 +393,6 @@ input.search-field:hover {
                 const matchItem = document.getElementById('match_item');
                 var ctags = document.getElementsByClassName("ctags");
                 for(let item of results){
-                    // searchItem.push(item.title);
                         rows.push(
                             `
                             <li>
@@ -479,7 +414,7 @@ input.search-field:hover {
 
         var searchItem = function(ev){
             const searchItem = Object.fromEntries(new FormData(form));
-           
+            
             
             if(searchItem.query.length===0){
                 results = [];
@@ -497,16 +432,40 @@ input.search-field:hover {
                     });
 
                 });
-
-                localStorage.setItem("searchHistory",searchItem.query);
+               
 
             }
         }
 
+        var showHistory = function(ev){
+            const rows=[];
+            const searchHistory = Array.from(new Set(itemsArray));
+            // const singleFilter= Array.from(new Set(filterItem));
+            const searchContent = document.getElementById("match_item");
+            const ctags = document.getElementsByClassName("ctags");
+
+            for(let itemHistory of searchHistory){
+                rows.push(
+                    `
+                    <li>
+                    <i class="far fa-history"><a class ="ctags" href='#' value='${itemHistory}'>${itemHistory}</a></i>
+                    </li>
+                    `
+                );
+                
+
+            }
+            
+            searchContent.innerHTML = rows.join(" ");
+
+            for(var i = 0 ; i < searchHistory.length; i ++){
+                ctags[i].addEventListener("click",selectSearchItem,false);
+            }
+
+        }
+
         var selectSearchItem = function(){
             const tags = this.getAttribute("value");
-            // const searchHistory=[];
-            // searchHistory.push(tags);
             query.value = tags
             results=[];
             Controller.searchItemList(results);
@@ -515,10 +474,13 @@ input.search-field:hover {
 
         const search = document.getElementById('form'); 
         const matchItem = document.getElementById('match_item');
+        const searchInput = document.getElementById('query');
 
-        search.addEventListener('input', searchItem);
+        search.addEventListener("input", searchItem);
+        searchInput.addEventListener("focus", showHistory);
+        console.log(localStorage.getItem("items"));
 
-        console.log(localStorage.getItem("searchHistory"));
+
 
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
