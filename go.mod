@@ -1,7 +1,7 @@
-module challenge.haraj.com.sa/kraicklist
+//module challenge.haraj.com.sa/kraicklist
 
 go 1.16
 
 require(
-//
+//...
 )
