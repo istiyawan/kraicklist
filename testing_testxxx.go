@@ -1,0 +1,147 @@
+package main
+
+import (
+	"fmt"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+	"runtime"
+	"testing"
+)
+
+func BenchmarkTable(b *testing.B) {
+	benchmarks := []struct {
+		name    string
+		request string
+	}{
+		{
+			name:    "wawan",
+			request: "wawan",
+		},
+		{
+			name:    "kuro",
+			request: "wawan",
+		},
+		{
+			name:    "umi",
+			request: "umi",
+		},
+		{
+			name:    "umi1",
+			request: "umi1",
+		},
+		{
+			name:    "umi2",
+			request: "umi2",
+		},
+		{
+			name:    "umi3",
+			request: "umi3",
+		},
+	}
+
+	for _, benchmark := range benchmarks {
+		b.Run(benchmark.name, func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				HelloWorld(benchmark.request)
+			}
+		})
+	}
+}
+
+func BenchmarkHelloWorld(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		HelloWorld("wawan")
+	}
+
+}
+
+func BenchmarkSub(b *testing.B) {
+	b.Run("wawan", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			HelloWorld("wawan")
+		}
+
+	})
+	b.Run("kuro", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			HelloWorld("kuro")
+		}
+
+	})
+}
+
+func TestTableHelloWorld(t *testing.T) {
+	tests := []struct {
+		name     string
+		request  string
+		expected string
+	}{
+		{
+			name:     "wawan",
+			request:  "wawan",
+			expected: "Hellowawan",
+		},
+		{
+			name:     "copid",
+			request:  "copid",
+			expected: "Hellocopid",
+		},
+		{
+			name:     "umi",
+			request:  "umi",
+			expected: "Helloumi",
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			result := HelloWorld(test.request)
+			assert.Equal(t, test.expected, result)
+		})
+	}
+
+}
+
+func TestSubTest(t *testing.T) {
+	t.Run("copid", func(t *testing.T) {
+		result := HelloWorld(" copid")
+		require.Equal(t, "Hello copid", result, "Result must be Hello copid")
+	})
+	t.Run("Wawans", func(t *testing.T) {
+		result := HelloWorld(" Wawans")
+		require.Equal(t, "Hello Wawan", result, "Result must be Hello Wawan")
+	})
+}
+
+func TestMain(m *testing.M) {
+	fmt.Println("Before unit test")
+
+	m.Run()
+
+	fmt.Println("After unit test")
+}
+
+func TestSkip(t *testing.T) {
+	if runtime.GOOS == "darwin" {
+
+		t.Skip("cant run on mac")
+	}
+
+	result := HelloWorld(" Wawan")
+	assert.Equal(t, "Hello Wawan", result, "Result must be 'Hello Wawan'")
+
+	fmt.Println(runtime.GOOS)
+
+}
+
+func TestHelloWorldAssert(t *testing.T) {
+	result := HelloWorld(" Wawan")
+	assert.Equal(t, "Hello Wawan", result, "Result must be 'Hello Wawan'")
+	fmt.Println("test hello wawan menggunakan assert done")
+}
+
+func TestHelloWorldRequire(t *testing.T) {
+	result := HelloWorld(" Wawan")
+	require.Equal(t, "Hello Wawan", result, "Result must be 'Hello Wawan'")
+	fmt.Println("test hello wawan menggunakan require done")
+}

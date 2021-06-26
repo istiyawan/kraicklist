@@ -23,6 +23,7 @@ func main() {
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/", fs)
 	http.HandleFunc("/search", handleSearch(searcher))
+
 	http.HandleFunc("/category", handleSearchByTags(searcher))
 	http.HandleFunc("/searchItem", handleSearchItem(searcher))
 	// define port, we need to set it as env for Heroku deployment
@@ -121,6 +122,10 @@ func handleSearchItem(s *Searcher) http.HandlerFunc {
 
 type Searcher struct {
 	records []Record
+}
+
+func HelloWorld(name string) string {
+	return ("Hello" + name)
 }
 
 func (s *Searcher) Load(filepath string) error {
