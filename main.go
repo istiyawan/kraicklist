@@ -60,6 +60,7 @@ func handleSearch(s *Searcher) http.HandlerFunc {
 			buf := new(bytes.Buffer)
 			encoder := json.NewEncoder(buf)
 			encoder.Encode(records)
+			w.WriteHeader(http.StatusOK)
 			w.Header().Set("Content-Type", "application/json")
 			w.Write(buf.Bytes())
 		},
@@ -86,6 +87,7 @@ func handleSearchByTags(s *Searcher) http.HandlerFunc {
 			buf := new(bytes.Buffer)
 			encoder := json.NewEncoder(buf)
 			encoder.Encode(records)
+			w.WriteHeader(http.StatusOK)
 			w.Header().Set("Content-Type", "application/json")
 			w.Write(buf.Bytes())
 
