@@ -1,9 +1,5 @@
-//module challenge.haraj.com.sa/kraicklist
-module github.com/istiyawan/kraicklist
+module kraicklist
 
-// +heroku goVersion go1.15
-go 1.15
+go 1.16
 
-require (
-	github.com/stretchr/testify v1.7.0
-)
+require github.com/stretchr/testify v1.7.0 // indirect
