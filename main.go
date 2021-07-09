@@ -12,6 +12,39 @@ import (
 	"strings"
 )
 
+// Interface
+// type ItemRepositoryInterface interface {
+// 	Search() ([]Record, error)
+// 	SearchByCat() ([]Record, error)
+// }
+//
+// type ItemRepositoryMock struct {
+// 	mock.Mock
+// }
+//
+// func (i ItemRepositoryMock) Search() ([]Record, error) {
+//
+// 	args := i.Called()
+// 	record := []Record{
+// 		{ID: 12, Title: "Apple", Content: "Apple Handphone"},
+// 	}
+// 	return record, args.Error(1)
+// }
+//
+// func (i ItemRepositoryMock) SearchByCat() ([]Record, error) {
+//
+// 	args := i.Called()
+// 	record := []Record{
+// 		{ID: 12, Title: "Apple", Content: "Apple Handphone"},
+// 	}
+// 	return record, args.Error(1)
+// }
+//
+// Service
+// type ItemService struct {
+// 	ItemRepositoryInterface
+// }
+
 func main() {
 	// initialize searcher
 	searcher := &Searcher{}
@@ -190,6 +223,7 @@ func (s *Searcher) SearchItem(query string) ([]Record, error) {
 	return result, nil
 }
 
+//entitiy
 type Record struct {
 	ID        int64    `json:"id"`
 	Title     string   `json:"title"`

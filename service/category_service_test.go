@@ -21,7 +21,7 @@ func TestCategoryService_GetNotFound(t *testing.T) {
 
 func TestCategoryService_GetSuccess(t *testing.T) {
 	category := entity.Category{
-		Id:   "100",
+		Id:   "1000",
 		Name: "Laptop",
 	}
 
