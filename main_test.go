@@ -11,14 +11,14 @@ type MockRepository struct {
 	mock.Mock
 }
 
-type ItemRepositoryInterface interface {
-	Search() ([]Record, error)
-	SearchByCat() ([]Record, error)
-}
-
-type ItemService struct {
-	ItemRepositoryInterface
-}
+// type ItemRepositoryInterface interface {
+// 	Search() ([]Record, error)
+// 	SearchByCat() ([]Record, error)
+// }
+//
+// type ItemService struct {
+// 	ItemRepositoryInterface
+// }
 
 func (mock *MockRepository) Search() ([]Record, error) {
 
